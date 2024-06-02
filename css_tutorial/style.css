@@ -1,0 +1,357 @@
+/* 
+This covers all of the general key concepts in CSS without going into the various properties or values:
+- A selector specifies the HTML elements to be styled. for example, 'body' is a selector and targets everything in the body container
+- A property is what we are styling in the HTML element. for example, 'margin' is the property (the left side)
+- A value is the setting for the property. for example, '0px' is the value (the right side)
+- A declaration is the property with the value, 'margin: 0px;'
+- A declaration block is a group of declarations inside curly braces
+- A rule set is a selector and a declaration block together
+- A id selector targets a single element with that id. for example, #p1 {}
+- A class selector targets all elements in the same class. for example, .box {}
+- A pseudo-class selector targets elements only in a specific state by the user. for example, a:hover {} targets all anchor elements that are being hovered over. 'a' is the selector, ':hover' is the pseudo-class, 'a:hover' is the pseudo-class selector
+- A pseudo-element selector targets a specific part of an element. for example, p::first-line {} targets the first line for all p elements. 'p' is the selector, '::first-line' is the pseudo-element, 'p::first-line' is the pseudo-element selector
+*/
+
+/* CSS can be applied in 3 ways:
+  1. Inline: this is CSS that is applied through the style attribute in an HTML element in the body container. <p style="color: red; font-size: 20px;">Example Text</p>
+
+  2. Internal: this is CSS that is also applied through the style attribute, but within the head container. This method looks exactly like external CSS, but it is applied in the same HTML document.
+  <head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+  </head>
+  
+  3. External: this is CSS that is an external CSS file. It allows you to separate CSS from HTML which makes it easier to styles across multiple HTML docs. Note that you need to link the HTML file with the CSS file like <link rel="stylesheet" href="styles.css"> in the head section.
+*/
+
+/* 
+Block elements: html elements that are visible on the doc and start on a new line and by default (unless you change the width), take up 100% of the width of their parent element, and the parent element is typically the body, which by default, is equal to the width of the viewport. This is because, child div elements will always have a width equal to their parent's width, unless manually updated. div, p, h1, ul, are block element examples.
+
+Inline elements: html elements that do not start on a new line and only take up as much width as necessary. span, a, img, are examples.
+
+The CSS box model is an invisible box that wraps around every HTML element. It consists of mini inner boxes: content, padding, border, and margins (in that order). Content is text and images. Padding is the space between the content and the border (note that padding will just push the content box away, not change its size. A border is a border that surrounds the content and padding. Margin is the space around the border (note that margin will just push the border box and its padding and content inside away, and not change any sizes. We usually say "the element's content/padding/border/margin."
+
+The default block element's size (the outerbox) is a long rectangle that spans from left to right of the html doc. This is the case even if the content consists of short text like "hi", which by default, is aligned to the left. In other words, this also means that the content box and border are also long rectangles. When you change the width and height of the <p> tag, you change the size of the content box (note this doesn't change the size or location of the actual content/text). This, in turn, changes how long the border is. Adjusting the content box, padding, or margin will affect the overarching outer box.
+
+Also, increasing the width/height of the content, or the padding size, or the border size, or the margin size, all technically are increasing the outer box, which can push other elements away.
+
+HTML documents follow a top-to-bottom flow for block elements. Each block element starts on a new line, and subsequent elements are placed below it. Even if you change the size of block elements like making the content box a small square, subsequent block elements will still be placed below it, not to the right. If you want it to the right, you would you need to make the original element floated left.
+
+element {
+    width: 200px;               //content width
+    height: 100px;              //content height
+    padding: 20px;              //space inside the border
+    border: 5px solid black;    //border around the padding
+    margin: 10px;               //space outside the border
+}
+
+Note that typically, properties like "color" and "font-size" that don't contain the words "padding," "border," or "margin", will just affect the content box. So when you change the width and height of an element, you are targeting and changing the size of the content box. If the content is text, this doesn't change the text size, but changes the content box size which in turn, can make the text fit into the new available space. When the content of an element is an image, changing the element's width and height adjusts the content box dimensions, causing the image to stretch to fill the space. This makes it look like you are directly changing the image dimensions.
+*/
+
+/*
+The viewport visible area of a website. It is the area where web content is displayed, and its size can change when the browser window is resized or when the user zooms in or out. The width of the viewport for your full-screen tab on chrome on your macbook is about 1600px.
+
+In html, every element other than the "viewport" has a parent (containing) element. parent elements enclose children elements. Ex:
+
+<div class="parent">
+    <div class="child">Child Element</div>
+</div>
+
+.parent {
+    width: 200px;
+}
+.child {
+    width: 50%;
+}
+
+The parent element for the <html> tag is the viewport and <head> and <body> are children of <html>. however, <html>, <head>, <body>, also all fall into the category of "root elements." When it comes to sizing and positioning, the root elements can be influenced by the viewport.
+
+Some values of proerties like width and height can have percentages like 50% instead of 50px. This means the element's width is set to 50% of the parent element's width. The default width of the root elements is equal to or 100% of the viewport width. Imagine a div element set to a width of 50% where its parent is the default body tag. Then the width of this div will be 50% of the body's width which is equal to the viewport's width. Now imagine a parent div and a child div of it. the parent div has a width of 50px and the child div's width isn't specified. by default, the child's width will also be 50px because as previously said, the child's width is equal to the parent's width unless manually updated.
+*/
+
+/* Basic CSS */
+body {
+    background-image: url("background.jpeg");
+    background-repeat: no-repeat;   /* default is repeat */
+    background-attachment: fixed;   /* values are scroll, fixed, local */
+    background-position: center;
+    background-size: cover;
+}
+
+h1 {
+    color: purple;
+    /* the browser will prioritize the first font if it is available and fall back to the next ones if it isn't. sans-serif doesn't need quotes because it is a generic font */
+    font-family: "Playfair Display", "consolas", sans-serif;
+    border-top-style: dotted;
+    border-bottom-style: dotted;
+    border-left-style: dotted;
+    border-left-width: 5px; /* px needs to be right next to the number like 5px */
+    border-left-color: red;
+    
+    /* linear-gradient is a CSS function, which is a feature that returns a CSS value based off its arguments */
+    background: linear-gradient(to right, skyblue, orange);
+}
+
+/* targets all html elements that have class="odd" */
+.odd {
+    background-color: lightskyblue; /* can also do background: lightskyblue; */
+    color: lightcoral;
+    font-family: "bodoni moda", "consolas", sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    /* text-decoration allows you to add multiple decorations together and the order of the values does not matter */
+    text-decoration: purple dotted underline 5px;
+    font-size: 26px;
+}
+
+.even {
+    width: 800px; /* makes the content box 800px and the content will stretch to fit this  box */
+    color: blue; /* makes the content (the text) blue */
+    border-style: solid; /* style of the border */
+    border-width: 5px;
+    border-color:gold;
+    border-radius: 30px; /* affects how round the corners are. the higher px, the more round. It is called radius bc it defines how far the visible curved corner is from the actual corner of the element's border. */
+    padding: 40px; /* affects the width of the padding on all sides. This doesn't affect the content box's size, just the padding box. If the padding is large, it makes the entire element's outer box larger and will push other elements away. */
+}
+
+/* Margins */
+/* # stands for id. so the css selector is targeting the element with id="box1" */
+#box1 {
+    border: 5px solid;
+    width: 250px;
+    height: 250px;
+    font-size: 22px; /* note that if the font-size is increased here, it will overflow outside of the content box. this is bc we specified the content box's size already and it won't change. */
+    background: greenyellow; /* this will change the content box's color */
+    
+    /*
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 50px;
+    margin-left:50px;
+    
+    margin: 50px;   //adds 50 pixels of space outside the border for all 4 sides
+    */
+
+    margin: auto; /* this places the content in the center. it affects the left and right margins but not the top and bottom margins. */
+}
+
+/* Float */
+/* this topic isn't as important bc flexbox and grid are more modern and useful */
+.box {
+    border: 1px solid;
+    width: 100px;
+    height: 100px;
+    font-size: 40px;
+    text-align: center; /* default value is left */
+    background: tomato;
+
+    /* the float property causes all elements it is affecting, to be taken out of the normal document flow. the types of values are left and right. for example, the left property puts the element all the way to the left of the page, and every subsequent element will wrap around it. you can only move the floated element to the left (which is the default), or to the right. If you want to move it somewhere in the middle, you would have to give it a "margin: auto". If you give an element a float and its width has already been manually specified, it will respect its width, and susequent divs will be outside of the outerbox. however, if you give a float to a div where the width isn't specified (so by default, it takes up the viewport), it will shrink the content box enough so that all of the content (text) is still inside it. Subsequent divs will then be placed directly wrapped around the floated element.
+    
+    Subsequent block elements after a floated element wrap around until there is no more space. after that, the remaining block elements will follow the default top-to-bottom flow of the document.
+    */
+    float: left;
+}
+
+p {
+    /* the clear property is used to stop elements from wrapping around a floated element. the values are left, right, and both. you do "clear: left" if the floated element before it is to the left, that is, it has a "float: left". likewise, you do "clear: right" if the floated element before it has a "float: right". And, "clear: both" moves the element below the preceding floating element, regardless if it is floated left or right. 
+    Note that normally, elements are placed top to bottom in an html doc and the space to the right is ignored. Float allows you to use that space. */
+
+    /* clear: left; */
+}
+
+/* Position */
+/* 
+The position property controls the position of elements. The difference between position and margin is that margin doesn't provide the same level of precise control. When you add margin-left to a default div, it adds space to the left of the border but the overall rectangle outline (which represents the div element), doesn't change at all. Additionally, adding a lot of margin, wont push the border pass the default viewport length, and instead will end up shortening the content box's width. Position with the relative value, however, will physically move the entire element (the long rectangle outline) away. If you move the element to the right by adding enough pixels to the "left" property, it will go pass the default viewport width, causing the user to need to scroll right. And as you can see, it won't end up shrinking the content box like margin. Essentially, margin deals with the space inside an element, and position deals with the space outside of the element. Note that if you were to use postion:relative with left:500px for example, while the entire element (the long rectangle) will literally shift to the right and now there is white space at the left, position:relative still preserves the normal document flow (meaning elements still follow a top-to-bottom approach and will not invade the white space, but instead go under it).
+*/
+/*  The position property has 5 values and is also used with 4 properties: top, bottom, right, left (tbrl).
+
+Position property has 5 values:
+- static: default value and tbrl have no effect.
+- relative: the main value which is used to just move an element relative to its point of origin (which is the top left corner of the element). the space the element originally occupied remains in the document flow so subsequent elements will go under it. tbrl will just move the element.
+- absolute: will remove the element from the normal document flow. If the element has no positioned parents (parents that aren't static), it stays in its original place and subsequent div elements will "ignore" it and be placed behind it. However, if you specify a tbrl property, and the element still has no positioned parents, then the element will move to the top left corner of the viewport and move the set amount of pixels away. In the scenario where the element that is positioned absolute does have a positioned parent, then the absolute positioned element will move to the top left corner of said positioned parent, even if a tbrl property isn't specified. If a tbrl is specified, it will simply just move the set amount of pixels in said direction.
+- fixed: will remove the element from the normal document flow and cause it to stay in the same position, even when the page is scrolled. tbrl can be used together to move the element in the exact spot you want, and it won't change its location even if you scroll. for example, using top:50px will bring the element to the top left of the viewport and move it down 50px. for some reason, on my browser, doing just position:fixed with no tbrl will make the element invisible or lost. but adding tblr will bring it back.
+- sticky: will position the element based on the user's scroll position. A sticky element toggles between relative and fixed, depending on the scroll position. Doing just position:sticky doesn't do anything and you need to add a tbrl property. top and bottom will not move the location of the original element once it reaches there, but left will, and right seems to not do anything (it might affect horizontal scrolling).
+*/
+#box2 {
+    border: 1px solid;
+    height: 300px;
+    width: 300px;
+    background-color: skyblue;
+    position:sticky;
+    bottom: 30px;
+    left: 50px;
+}
+#box3 {
+    border: 1px solid;
+    height: 100px;
+    width: 100px;
+    background-color: tomato;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+}
+
+/* Pseudo-class: targets elements only in a specific state by the user */
+a:link {
+    color:lawngreen;    /* affects the color of the original link before it is visited */
+}
+a:visited {
+    color:grey;
+}
+a:hover {
+    color:tomato;
+}
+a:active {
+    color:yellow;
+}
+button:hover {
+    background-color:lightgrey;
+}
+button:active {
+    background-color: white;
+}
+
+/* the nth-child selector is a "structural pseudo class" bc it styles elements based on their position. hover, action, etc are "action pseudo classes" bc they style elements based on user action.
+
+the nth-child selector will set n = 0, then 1, then 2, and so on until there are no more list items. for 3n+1, n=0 will make the 1st item skyblue, n=1 will make the 4th item skyblue, n=2 will make the 7th item skyblue, but there isn't a 7th item, so it stops. */
+/*
+li:nth-child(1) {
+    background-color: yellow;
+}
+li:nth-child(even) {
+    background-color: lightcoral;
+}
+*/
+li:nth-child(3n+1) {
+    background-color: skyblue;
+}
+
+/* Shadows: there are text-shadows (applies shadow to text) and box-shadows (applies shadow in the inner perimeters of the content box. */
+#shadows {
+    /* text-shadow has 4 consecutive values: horizontal, vertical, blur, color. the last 2 are optional. */
+    text-shadow: 3px -2px 2px red;
+    
+    /* you can also apply multiple shadows
+    text-shadow: 0px 0px 5px yellow, 0px -5px 5px red;
+    */
+}
+#shadows:hover {
+    /* box-shadow has 6 consecutive values: horizontal, vertical, blur, spread, color, inset. the last 4 are optional. */
+    box-shadow: 5px 5px 5px black;
+}
+
+/* Icons */
+/* https: //fontawesome.com/ */
+/* Select the class for the icon to add declarations */
+.fa-twitter {
+    color: aqua;
+}
+.fa-youtube {
+    color: red;
+}
+
+/* Transformations */
+/* 
+In terms of the layout, all transformations including translateX and translateY will move the element visually, but its original location is still technically there, so subsequent elements will go under it. This can result in the element, "visually" covering other elements. To clarify, when you apply a transformation like scaleX() to an element, it visually changes the width of the element, but the actual dimensions and position of the element's outer box (including margin, border, padding, and content box) in the document flow remain unchanged.
+*/
+#box4 {
+    border: 6px solid;
+    width: 100px;
+    height: 100px;
+    font-size: 100px;
+    text-align: center;
+    background:lightskyblue;
+
+    /* translateX and translateY are ideal/better for animations and transitions where you need smooth, performant movement, compared to margin/position.*/
+    /* doing subsequent transform properties overwrite the previous, so they don't stack. if you want them to stack, you need to do, transform: translateX(50px) rotate(45deg); */
+    transform: translateX(50px);
+    transform: translateY(50px);
+    /* this applies both translateX and translateY */
+    transform: translate(50px, 50px);
+
+    transform: rotateX(180deg);
+    transform: rotateY(180deg);
+    transform: rotateZ(180deg);
+
+    /* scaleX(2) will stretch the element horizontally twice its normal length, "visually" */
+    transform: scaleX(2);
+    transform: scaleY(2);
+    transform: scale(2,2);
+
+    transform: skewX(45deg);
+    transform: skewY(45deg);
+    transform: skew(20deg, 20deg);
+
+    /* "matrix" combines the following (hard to use):
+    - scaleX()
+    - skewY()
+    - skewX(),
+    - scaleY(),
+    - translateX(),
+    - translateY()
+    */
+    transform: matrix(1, 1, 2, 1, 500, 100);
+}
+
+/* Animations */
+/* 
+Animations allow you to create smooth animations by changing the properties of an element over time. Animations are defined using the @keyframes rule, which are applied to elements using the animation property. Keyframes define what should happen at specific points during the animation. The "animation" property applies the animation to an element by specifying the keyframes name, and also defines other characteristics like duration, timing-function, etc. You can also apply these characteristics as their own property like "animation-duration: 5s;" but it is recommended to put all the characteristics just inside the "animation" property. If you don't want to use certain characteristics, you can just omit them in the "values" section of the "animation" property.
+*/
+#box5 {
+    width: 250px;
+    height: 250px;
+    background: red;
+    font-size: 225px;
+    text-align: center;
+
+    /*
+    animation: mySlide;
+    animation-duration: 5s;
+    animation-timing-function: ease-out;
+    animation-delay: 4s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    */
+    /* Order: animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state.
+    The only mandatory one is the animation name, but the duration is almost always specified too bc if you don't, it defaults to 0s, which means the animation happens instantly and isn't visible.
+    */
+    animation: myColorChange 3s linear infinite running 
+}
+
+/* Can also use pseudo classes with animations */
+#box5:hover {
+}
+#box5:active {
+}
+
+/* 
+for keyframes, you give it a percentages to specify specific points during the animation. for example, if you were to type 20%{background-color: orange;}, then at 20% of the duration (.6s if duration is 3s), the background-color will turn orange. Also, "from" is the same as 0% and "to" is the same as 100%. 
+
+Note that the transition between percentages is gradual and not instant. The animation will always gradually transition from the starting state (0%) to the first specified keyframe. If there are multiple subsequent keyframes, the animation will gradually transition between each keyframe in the order they are specified. If there is a 100% keyframe, then it will gradually go from the penultimate keyframe to 100%, and at that point, one full iteration of the duration has completed. If the iteration count is infinite, the percentage will go back to 0%. If there is no 100% keyframe, the animation will stay at the state defined by the last keyframe (say 80%) until it reaches 100%.
+*/
+@keyframes mySlide {
+    from{margin-left: 100%;}
+    to{margin-left: 0%;}
+}
+@keyframes myRotate {
+    100%{transform: rotateX(360deg)}
+    100%{transform: rotateY(360deg)}
+    100%{transform: rotateZ(360deg)} /* Only the last one will be applied */
+}
+@keyframes myOpacity {
+    /* from 0% to 50%, the opacity will gradually decrease from its initial default value of 1 to 0. from 50% to 100%, since no keyframes are specified for this interval, the opacity will remain at 0 until the end of the animation (100%). */
+    50%{opacity: 0;}
+}
+@keyframes myScale {
+    50%{transform: scale(0.5, 0.5);}
+}
+@keyframes myColorChange {
+    20%{background-color: orange;}
+    40%{background-color: yellow;}
+    60%{background-color: green;}
+    80%{background-color: blue;}
+    100%{background-color: purple;}
+}
