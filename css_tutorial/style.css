@@ -72,6 +72,21 @@ The parent element for the <html> tag is the viewport and <head> and <body> are 
 Some values of proerties like width and height can have percentages like 50% instead of 50px. This means the element's width is set to 50% of the parent element's width. The default width of the root elements is equal to or 100% of the viewport width. Imagine a div element set to a width of 50% where its parent is the default body tag. Then the width of this div will be 50% of the body's width which is equal to the viewport's width. Now imagine a parent div and a child div of it. the parent div has a width of 50px and the child div's width isn't specified. by default, the child's width will also be 50px because as previously said, the child's width is equal to the parent's width unless manually updated.
 */
 
+/*
+Combinators are used to target specific elements based on their relationship with other elements. There are 4 combinators:
+- descendant: represented with " "
+- child: represented with ">"
+- general sibling: represented with "~"
+- adjacent sibling: represented with "+"
+
+for example:
+#box2 > div {
+    background-color: red;
+}
+- This will target all divs that are direct children (not descendants) of #box2
+*/
+
+
 /* Basic CSS */
 body {
     background-image: url("background.jpeg");
@@ -194,6 +209,23 @@ Position property has 5 values:
     left: 100px;
 }
 
+/* Overflow */
+/* 
+The property sets the behavior of a parent element when a child element's outerbox does not fit in the parent element box. remember that by default, if the child element's dimensions for the content box aren't specified, they will be the same as its parents. in this case, the p tag will also have a width of 400px and a height of 30px, but the text inside the p tag is long, and it overflows past its box as well as its parent's box.
+
+Here are some of its important values:
+visible: the default, where the content overflows outside the parent box
+hidden: the overflow is clipped and the rest of the content is invisible, but still there
+scroll: the overflow is clipped, but there is a scrollbar to see the rest of the content
+auto: the same as "scroll", but the scrollbar is only added if the content oveflows
+*/
+#box4 {
+    border: 2px solid;
+    width: 400px;
+    height: 30px;
+    overflow: scroll;
+}
+
 /* Pseudo-class: targets elements only in a specific state by the user */
 a:link {
     color:lawngreen;    /* affects the color of the original link before it is visited */
@@ -257,7 +289,7 @@ li:nth-child(3n+1) {
 /* 
 In terms of the layout, all transformations including translateX and translateY will move the element visually, but its original location is still technically there, so subsequent elements will go under it. This can result in the element, "visually" covering other elements. To clarify, when you apply a transformation like scaleX() to an element, it visually changes the width of the element, but the actual dimensions and position of the element's outer box (including margin, border, padding, and content box) in the document flow remain unchanged.
 */
-#box4 {
+#box5 {
     border: 6px solid;
     width: 100px;
     height: 100px;
@@ -300,7 +332,7 @@ In terms of the layout, all transformations including translateX and translateY 
 /* 
 Animations allow you to create smooth animations by changing the properties of an element over time. Animations are defined using the @keyframes rule, which are applied to elements using the animation property. Keyframes define what should happen at specific points during the animation. The "animation" property applies the animation to an element by specifying the keyframes name, and also defines other characteristics like duration, timing-function, etc. You can also apply these characteristics as their own property like "animation-duration: 5s;" but it is recommended to put all the characteristics just inside the "animation" property. If you don't want to use certain characteristics, you can just omit them in the "values" section of the "animation" property.
 */
-#box5 {
+#box6 {
     width: 250px;
     height: 250px;
     background: red;
@@ -322,9 +354,9 @@ Animations allow you to create smooth animations by changing the properties of a
 }
 
 /* Can also use pseudo classes with animations */
-#box5:hover {
+#box6:hover {
 }
-#box5:active {
+#box6:active {
 }
 
 /* 
