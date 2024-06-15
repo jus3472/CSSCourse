@@ -28,9 +28,11 @@ This covers all of the general key concepts in CSS without going into the variou
 */
 
 /* 
-Block elements: html elements that are visible on the doc and start on a new line and by default (unless you change the width), take up 100% of the width of their parent element, and the parent element is typically the body, which by default, is equal to the width of the viewport. This is because, child div elements will always have a width equal to their parent's width, unless manually updated. div, p, h1, ul, are block element examples.
+Block elements: html elements that are visible on the doc and always start on a new line (they have their own line) and by default (unless you change the width), take up 100% of the width of their parent element, and the parent element is typically the body, which by default, is equal to the width of the viewport. This is because, child div elements will always have a width equal to their parent's width, unless manually updated. div, p, h1, ul, are block element examples.
 
-Inline elements: html elements that do not start on a new line and only take up as much width as necessary. span, a, img, are examples.
+Inline elements: html elements that do not start on a new line and only take up the width of the actual content. span, a, img, are examples. for example, div followed by div, will have both on own lines. div followed by span will have span below div because div has its own line. span followed by div will also have div under it as its own line. span followed by span will have both on the same line consecutively.
+
+Inline-block elements: you can make elements inline-block only through the display property (values include: block, inline, inline-block, none, flex, etc) which affects the layout of elements (ie, top to bottom with block, or left to right with inline). Inline-block is a combination where elements are left to right consecutively, but you can choose the width and height like how you can for block elements, remember you can't change the width and height with standard inline elements where only the content dictates the size.
 
 The CSS box model is an invisible box that wraps around every HTML element. It consists of mini inner boxes: content, padding, border, and margins (in that order). Content is text and images. Padding is the space between the content and the border (note that padding will just push the content box away, not change its size. A border is a border that surrounds the content and padding. Margin is the space around the border (note that margin will just push the border box and its padding and content inside away, and not change any sizes. We usually say "the element's content/padding/border/margin."
 
@@ -110,7 +112,7 @@ h1 {
     background: linear-gradient(to right, skyblue, orange);
 }
 
-/* targets all html elements that have class="odd" */
+/* Targets all html elements that have class="odd" */
 .odd {
     background-color: lightskyblue; /* can also do background: lightskyblue; */
     color: lightcoral;
@@ -350,7 +352,7 @@ Animations allow you to create smooth animations by changing the properties of a
     /* Order: animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state.
     The only mandatory one is the animation name, but the duration is almost always specified too bc if you don't, it defaults to 0s, which means the animation happens instantly and isn't visible.
     */
-    animation: myColorChange 3s linear infinite running 
+    animation: myColorChange 3s linear infinite running
 }
 
 /* Can also use pseudo classes with animations */
@@ -360,7 +362,7 @@ Animations allow you to create smooth animations by changing the properties of a
 }
 
 /* 
-for keyframes, you give it a percentages to specify specific points during the animation. for example, if you were to type 20%{background-color: orange;}, then at 20% of the duration (.6s if duration is 3s), the background-color will turn orange. Also, "from" is the same as 0% and "to" is the same as 100%. 
+for keyframes, you give it percentages to specify specific points during the animation. for example, if you were to type 20%{background-color: orange;}, then at 20% of the duration (.6s if duration is 3s), the background-color will turn orange. Also, "from" is the same as 0% and "to" is the same as 100%. 
 
 Note that the transition between percentages is gradual and not instant. The animation will always gradually transition from the starting state (0%) to the first specified keyframe. If there are multiple subsequent keyframes, the animation will gradually transition between each keyframe in the order they are specified. If there is a 100% keyframe, then it will gradually go from the penultimate keyframe to 100%, and at that point, one full iteration of the duration has completed. If the iteration count is infinite, the percentage will go back to 0%. If there is no 100% keyframe, the animation will stay at the state defined by the last keyframe (say 80%) until it reaches 100%.
 */
@@ -386,4 +388,57 @@ Note that the transition between percentages is gradual and not instant. The ani
     60%{background-color: green;}
     80%{background-color: blue;}
     100%{background-color: purple;}
+}
+
+/* Flexbox */
+/* 
+https: //www.youtube.com/watch?v=phWxA89Dy94&ab_channel=SlayingTheDragon
+Flexbox: a layout mode that makes it easier to move elements without float, position, or translate. It makes it easier to lay out child elements inside of a container (parent element). Anything that you can do in flexbox, can technically be done without it with float and position, but flexbox makes it easier to do it.
+There are flex containers (the parent), and flex items (the children). the element that has "display: flex" is the flex container and its children are the flex items. Note that subsequent elements (siblings, not children) of flex containers will be placed below it, if it originally is a div (block) or a span (inline). When you move the position of the children elements, the entire element box is physically moving (but won't go out of the container) like with the position property and unlike the transform property.
+*/
+/*
+In flexbox, there is a main-axis and a cross-axis. by default, the main-axis is the x-axis and the cross-axis is the y-axis, but you can swap it around.
+
+Here are all of the properties and values for the flex-container:
+- "display: flex" sets the flex container, and will also by default place the child elements along the main axis (x-axis).
+- "flex-direction" defines the main-axis, by default it is 'row' (x-axis), but changing it to 'column' will make the main-axis the y-axis.
+- "justify-content" allows you to align children elements along the main-axis. values include: 'flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'
+- "align-items" allows you to align children elements (on 1 line) along the cross-axis. think of it as the "justify-content" version for the cross-axis. values include: 'flex-start', 'flex-end', 'center', 'baseline' (same as flex-start, but the text is aligned too)
+- "flex-wrap" allows flex items to wrap because by default, flex items will all try to fit in one line, and if you add a lot of flex items, their width will decrease to all fit on the same line. values include: nowrap (default), wrap.
+- "align-content" property is unlocked and only works if "flex-wrap" is set to 'wrap'. In other words, it only works if there are multiple lines of elements. the property aligns children elements on the cross axis (just like align-items), but it specifically manages the space between the lines created from "flex-wrap: wrap" and doesn't technically move the children elements like "align-items". the values are the same as "justify-content" (meaning it also comes with the values: 'space-between', 'space-around', 'space-evenly'. these values specifically deal with the spacing of entire lines on the cross-axis and not individual child elements like justify-content on the main-axis).
+- "gap" has a value of pixels or other measurements. it adds more gap between child elements.
+*/
+/*
+Here are all of the properties and values for the flex-items:
+- "flex-grow" accepts a unitless value that serves as a proportion. It allows the item to grow if there is enough space to do so.
+- "flex-shrink" also accepts a unitless value that serves as a proportion. It defines how fast one item shrinks in comparison to the others when the window is slowly minimized. Setting the value to 0, ensures the item doesn't shrink at all.
+- "flex-basis" defines the size of an item before the remaining space is distributed (it's essentially the same as the width property but only works for flex-items).
+- "flex" is shorthand for the above 3 properties in that order, where the last 2 are optional.
+- "align-self" overwrites the value you set in the "align-items" property in the container, but just for one individual child element. it has the same values as "align-items".
+*/
+#container {
+    border: 7px solid;
+    width: 600px;
+    height: 600px;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+    gap: 9px;
+}
+.children {
+    border: 7px solid #e11d48;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    background-color: #fb7185;
+    width: 100px;
+    height: 100px;
+}
+#child10 {
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-self: center;
 }
