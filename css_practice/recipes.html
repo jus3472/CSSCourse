@@ -11,8 +11,8 @@
 <body>
 
     <header>
-        <h1>Hello! Welcome to Justin's Recipes</h1>
-        <nav aria-label="primary-navigation">
+        <h1 id="title">Hello! Welcome to Justin's Recipes</h1>
+        <nav aria-label="primary-navigation" id="nav">
             <ul>
                 <li>
                     <a href="#breakfast">Breakfast Recipe</a>
@@ -35,16 +35,18 @@
 
     <main>
         <article id="breakfast">
-            <h2>Here is my Breakfast Recipe</h2>
-            <img 
-            src="foodimgs/breakfast.jpeg"
-            alt="breakfast" 
-            title="bacon egg and cheese sandwich"
-            height="300"
-            width="350"
-            >
-            <p>Let me tell you how I like to my breakfast bacon egg and cheese sandwich</p>
-            <ol>
+            <h2 class="subtitle">Here is my Breakfast Recipe</h2>
+            <div class="containerImage">
+                <img 
+                src="foodimgs/breakfast.jpeg"
+                alt="breakfast" 
+                title="bacon egg and cheese sandwich"
+                height="300"
+                width="350"
+                >
+            </div>
+            <em class="foodIntro">Let me tell you how I like to make my breakfast bacon egg and cheese sandwich</em>
+            <ol class="list">
                 <li>
                     Take two slices of multigrain bread and toast it on the setting: 2.
                 </li>
@@ -82,16 +84,18 @@
         </article>
 
         <article id="chicken">
-            <h2>Here is my Chicken Recipe</h2>
-            <img 
-            src="foodimgs/chicken.jpeg"
-            alt="chicken" 
-            title="chicken"
-            height="300"
-            width="350"
-            >
-            <p>Let me tell you how I cook my garlic roasted chicken</p>
-            <ol>
+            <h2 class="subtitle">Here is my Chicken Recipe</h2>
+            <div class="containerImage">
+                <img 
+                src="foodimgs/chicken.jpeg"
+                alt="chicken" 
+                title="chicken"
+                height="300"
+                width="350"
+                >
+            </div>
+            <em class="foodIntro">Let me tell you how I cook my garlic roasted chicken</em>
+            <ol class="list">
                 <li>
                     Season the chicken with salt, black pepper, and garlic.
                 </li>
@@ -126,16 +130,18 @@
         </article>
 
         <article id="steak">
-            <h2>Here is my Steak Recipe</h2>
-            <img 
-            src="foodimgs/steak.jpeg"
-            alt="steak" 
-            title="steak"
-            height="300"
-            width="350"
-            >
-            <p>Let me tell you how I cook my world famous steak!</p>
-            <ol>
+            <h2 class="subtitle">Here is my Steak Recipe</h2>
+            <div class="containerImage">
+                <img 
+                src="foodimgs/steak.jpeg"
+                alt="steak" 
+                title="steak"
+                height="300"
+                width="350"
+                >
+            </div>
+            <em class="foodIntro">Let me tell you how I cook my world famous steak!</em>
+            <ol class="list">
                 <li>
                     Season your steak generously with Montreal Steak Seasoning.
                 </li>
@@ -170,16 +176,18 @@
         </article>
 
         <article id="pasta">
-            <h2>Here is my Pasta Recipe</h2>
-            <img 
-            src="foodimgs/pasta.jpeg"
-            alt="pasta" 
-            title="pasta"
-            height="300"
-            width="350"
-            >
-            <p>Let me tell you how I like to make pasta</p>
-            <ol>
+            <h2 class="subtitle">Here is my Pasta Recipe</h2>
+            <div class="containerImage">
+                <img 
+                src="foodimgs/pasta.jpeg"
+                alt="pasta" 
+                title="pasta"
+                height="300"
+                width="350"
+                >
+            </div>
+            <em class="foodIntro">Let me tell you how I like to make pasta</em>
+            <ol class="list">
                 <li>
                     Take out your spaghetti and boil it in a large pot for 10 minutes for al dente.
                 </li>
@@ -216,8 +224,8 @@
         <hr>
         <br>
 
-        <table>
-            <caption>
+        <table id="table">
+            <caption id="tableCaption">
                 Here are all of the ingredients needed
             </caption>
             <tr>
@@ -239,18 +247,18 @@
                 <td>Chicken</td><td>Steak</td><td>Spaghetti</td>
             </tr>
             <tr>
-                <th colspan="3">Only 18 Ingredients!</th>
+                <th colspan="3" id="tableHeading">Only 18 Ingredients!</th>
             </tr>
         </table>
 
         <br>
 
-        <aside>
+        <aside id="aside">
             <details>
                 <summary>
                     Guess what my <em>favorite</em> recipe is...
                 </summary>
-                My <strong>pasta recipe</strong> is my favorite!
+                <div id="answer">My <strong>pasta recipe</strong> is my favorite!</div>
             </details>
         </aside>
         
@@ -258,7 +266,7 @@
         <hr>
 
         <article id="contact">
-            <h2>Contact Me!</h2>
+            <h2 id="contactTitle">Contact Me!</h2>
             <form action="https://httpbin.org/get" method="get">
                 <fieldset>
                     <legend>

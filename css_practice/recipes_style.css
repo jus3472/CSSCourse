@@ -1,0 +1,82 @@
+body {
+    background-image: url(background-food.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+#title {
+    font-family: "Playfair Display", "consolas", sans-serif;
+    text-align: center;
+    font-size: 50px;
+    color: #333;
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.15), 6px 6px 0px rgba(0, 0, 0, 0.1);
+}
+#nav {
+    width: 220px;
+    border: 7px solid rgb(52, 51, 51);
+    font-size: 20px;
+    border-radius: 10px;
+}
+.subtitle {
+    text-align: center;
+    font-size: 25px;
+    color: rgb(3, 123, 197);
+}
+.containerImage {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.foodIntro {
+    font-size: 22px;
+    font-weight: bold;
+}
+.list li {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+#table {
+    font-size: 20px;
+    color: rgb(59, 59, 59);
+}
+#tableCaption {
+    margin-bottom: 15px;
+    padding-right: 90px;
+    font-weight: bold;;
+}
+#tableHeading {
+    padding-top: 20px;
+}
+#aside {
+    font-size: 20px;
+}
+td {
+    padding-bottom: 10px;
+    padding-right: 30px;
+}
+#answer {
+    margin-top: 10px;
+}
+#contactTitle {
+    text-align: center;
+    font-size: 30px;
+}
+legend {
+    font-size: 20px;
+    font-weight: bold;
+}
+label {
+    font-size: 18px;
+}
+button {
+    color:rgb(59, 59, 59);
+}
+a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+a:visited {
+    color: rgba(0, 8, 255, 0.667);
+}
+a:hover {
+    background-color: lightcoral;
+}
